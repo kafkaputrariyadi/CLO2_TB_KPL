@@ -19,3 +19,32 @@ def get_interest_rate():
     except:
         pass
     return 3.5
+
+def get_investment_options():
+    """
+    Mendapatkan daftar opsi investasi dari API eksternal
+    
+    Returns:
+        list: Daftar opsi investasi dengan perkiraan return
+        
+    Contoh Response API:
+    [
+        {
+            "name": "Deposito",
+            "return": 5.0
+        },
+        {
+            "name": "Reksadana Saham",
+            "return": 10.0
+        }
+    ]
+    """
+    try:
+        return [
+            {"name": "Deposito", "return": 5.0},
+            {"name": "Reksadana Pendapatan Tetap", "return": 7.0},
+            {"name": "Reksadana Saham", "return": 10.0},
+            {"name": "Saham Blue Chip", "return": 12.0}
+        ]
+    except:
+        return []

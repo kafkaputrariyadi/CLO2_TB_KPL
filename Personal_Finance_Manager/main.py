@@ -3,6 +3,7 @@ from modules.transaction_recorder import TransactionRecorder
 from modules.budget_planner import BudgetPlanner
 from modules.monthly_summary import MonthlySummary
 from modules.savings_calculator import SavingsCalculator
+from modules.financial_goals import FinancialGoals
 
 def main():
     if not os.path.exists('data'):
