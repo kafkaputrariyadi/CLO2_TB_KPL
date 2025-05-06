@@ -1,6 +1,6 @@
 import os
 from modules.transaction_recorder import TransactionRecorder
-
+from modules.budget_planner import BudgetPlanner
 def main():
     if not os.path.exists('data'):
         os.makedirs('data')
