@@ -1,1 +1,16 @@
-
+[
+  {
+    "date": "2025-05-06 10:43:41",
+    "type": "pemasukan",
+    "amount": 100000.0,
+    "description": "Makanan",
+    "category": "Makanan"
+  },
+  {
+    "date": "2025-05-06 10:43:50",
+    "type": "pengeluaran",
+    "amount": 100000.0,
+    "description": "Makanan",
+    "category": "Makanan"
+  }
+]
