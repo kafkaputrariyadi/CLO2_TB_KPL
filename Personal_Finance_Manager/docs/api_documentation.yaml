@@ -29,3 +29,28 @@ paths:
                     description: Suku bunga dalam persen
         '500':
           description: Error server internal
+  /investment-options:
+    get:
+      summary: Mendapatkan opsi investasi
+      description: Mengembalikan daftar opsi investasi dengan perkiraan return
+      responses:
+        '200':
+          description: Sukses mendapatkan opsi investasi
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: Deposito
+                      description: Nama produk investasi
+                    return:
+                      type: number
+                      format: float
+                      example: 5.0
+                      description: Perkiraan return tahunan dalam persen
+        '500':
+          description: Error server internal
