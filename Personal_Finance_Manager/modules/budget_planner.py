@@ -1,24 +1,31 @@
 import json
+from typing import List, Dict, Any, TypeVar
 from utils.table_utils import display_table
+
+T = TypeVar('T', bound=Dict[str, Any])
 
 class BudgetPlanner:
     def __init__(self):
         self.budgets_file = 'data/budgets.json'
         self.transactions_file = 'data/transactions.json'
-        self.state = 'idle'  
+        self.state = 'idle' 
 
-    def load_budgets(self):
+    def update_field(self, item: T, field: str, value: Any) -> T:
+        item[field] = value
+        return item
+
+    def load_budgets(self) -> List[Dict[str, Any]]:
         try:
             with open(self.budgets_file, 'r') as f:
                 return json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
-    def save_budgets(self, budgets):
+    def save_budgets(self, budgets: List[Dict[str, Any]]):
         with open(self.budgets_file, 'w') as f:
             json.dump(budgets, f, indent=2)
 
-    def load_transactions(self):
+    def load_transactions(self) -> List[Dict[str, Any]]:
         try:
             with open(self.transactions_file, 'r') as f:
                 return json.load(f)
@@ -40,9 +47,11 @@ class BudgetPlanner:
         budgets = self.load_budgets()
         budgets.append(budget)
         self.save_budgets(budgets)
-        print("Anggaran berhasil dibuat!")
+        print("✅ Anggaran berhasil dibuat!")
 
-    def check_budgets(self):
+        self.state = 'idle'  
+
+    def check_budgets(self) -> List[Dict[str, Any]]:
         budgets = self.load_budgets()
         transactions = self.load_transactions()
 
@@ -76,30 +85,35 @@ class BudgetPlanner:
         
         display_table(headers, rows)
 
-    def run(self):
-        while True:
-            print("\nPerencanaan dan Pemantauan Anggaran:")
-            print("1. Pembuatan anggaran per kategori")
-            print("2. Peringatan ketika pengeluaran mendekati atau melebihi batas anggaran")
-            print("9. Kembali")
-            
-            choice = input("Pilih menu: ")
-            
-            if choice == '1':
-                self.create_budget()
-            elif choice == '2':
-                self.view_budgets()
-                self.check_budget_alerts()
-            elif choice == '9':
-                break
-            else:
-                print("Pilihan tidak valid. Silakan coba lagi.")
-
     def check_budget_alerts(self):
         budgets = self.check_budgets()
         for budget in budgets:
             remaining_percent = (budget['remaining'] / budget['amount']) * 100
             if remaining_percent < 0:
-                print(f"\nPERINGATAN: Pengeluaran untuk kategori {budget['category']} melebihi anggaran!")
+                print(f"\n⚠️  MELEBIHI ANGGARAN: {budget['category']}")
             elif remaining_percent < 20:
-                print(f"\nPERINGATAN: Pengeluaran untuk kategori {budget['category']} mendekati batas anggaran (sisa {remaining_percent:.1f}%)")
+                print(f"\n⚠️  MENDESAK: {budget['category']} tinggal {remaining_percent:.1f}%")
+        self.state = 'idle'
+
+    def run(self):
+        while self.state != 'exit':
+            if self.state == 'idle':
+                print("\n Menu Anggaran (State:", self.state, ")")
+                print("1. Buat Anggaran")
+                print("2. Cek Peringatan Anggaran")
+                print("9. Keluar")
+                pilihan = input("Pilih: ")
+
+                if pilihan == '1':
+                    self.state = 'create'
+                elif pilihan == '2':
+                    self.state = 'alert'
+                elif pilihan == '9':
+                    self.state = 'exit'
+                else:
+                    print("❌ Pilihan tidak valid.")
+            elif self.state == 'create':
+                self.create_budget()
+            elif self.state == 'alert':
+                self.view_budgets()
+                self.check_budget_alerts()
