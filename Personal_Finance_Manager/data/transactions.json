@@ -12,5 +12,19 @@
     "amount": 100000.0,
     "description": "Makanan",
     "category": "Makanan"
+  },
+  {
+    "date": "2025-06-13 22:24:12",
+    "type": "pemasukan",
+    "amount": 10000000.0,
+    "description": "makanan",
+    "category": "Makanan"
+  },
+  {
+    "date": "2025-06-13 22:24:23",
+    "type": "pengeluaran",
+    "amount": 10000000.0,
+    "description": "makanan",
+    "category": "Makanan"
   }
 ]
