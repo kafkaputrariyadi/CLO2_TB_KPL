@@ -73,7 +73,7 @@ class MonthlySummary:
             if choice == '1':
                 self.show_summary()
             elif choice == '2':
-                self.show_summary()  # Both functionalities are combined
+                self.show_summary() 
             elif choice == '9':
                 break
             else:

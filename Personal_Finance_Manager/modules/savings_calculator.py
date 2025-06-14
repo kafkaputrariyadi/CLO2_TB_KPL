@@ -19,7 +19,7 @@ class SavingsCalculator:
     def calculate_saving_time(self):
         target = float(input("Masukkan target tabungan: "))
         monthly_deposit = float(input("Masukkan setoran bulanan: "))
-        interest_rate = get_interest_rate() / 100 
+        interest_rate = get_interest_rate() / 100  
 
         if monthly_deposit <= 0:
             print("Setoran bulanan harus lebih dari 0")
