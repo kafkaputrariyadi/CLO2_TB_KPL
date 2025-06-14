@@ -1,9 +1,10 @@
 import os
 from modules.transaction_recorder import TransactionRecorder
 from modules.budget_planner import BudgetPlanner
-from modules.monthly_summary import MonthlySummary
 from modules.savings_calculator import SavingsCalculator
+from modules.monthly_summary import MonthlySummary
 from modules.financial_goals import FinancialGoals
+from modules.savings_strategy import AggressiveStrategy
 
 def main():
     if not os.path.exists('data'):
@@ -30,7 +31,9 @@ def main():
         elif choice == '2':
             BudgetPlanner().run()
         elif choice == '3':
-            SavingsCalculator().run()
+            calculator = SavingsCalculator()
+            calculator.set_strategy(AggressiveStrategy())
+            calculator.run()
         elif choice == '4':
             MonthlySummary().run()
         elif choice == '5':

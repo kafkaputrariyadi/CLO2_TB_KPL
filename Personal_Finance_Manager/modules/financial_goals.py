@@ -1,8 +1,10 @@
 import json
 import math
 from utils.api_utils import get_investment_options
+from memory_profiler import profile
 
 class FinancialGoals:
+    @profile
     def __init__(self):
         self.goals_file = 'data/goals.json'
 
@@ -96,3 +98,7 @@ class FinancialGoals:
                 break
             else:
                 print("Pilihan tidak valid. Silakan coba lagi.")
+                
+if __name__ == "__main__":
+    calculator = FinancialGoalsCalculator()
+    calculator.calculate_goal_time()

@@ -10,5 +10,11 @@
     "target_amount": 100000000.0,
     "time_frame": 10,
     "current_amount": 0
+  },
+  {
+    "name": "haji",
+    "target_amount": 100000.0,
+    "time_frame": 1,
+    "current_amount": 0
   }
 ]
